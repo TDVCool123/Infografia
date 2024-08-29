@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://ds50ydx8lhi52"]
+
+[ext_resource type="Texture2D" uid="uid://kk71xb6np3po" path="res://assets/textures/Enemies/Bat.png" id="1_skby6"]
+[ext_resource type="Script" path="res://scripts/bat.gd" id="1_tq8gb"]
+[ext_resource type="Script" path="res://scripts/animated_sprite_2d.gd" id="3_jiwaa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nys3"]
+atlas = ExtResource("1_skby6")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx21o"]
+atlas = ExtResource("1_skby6")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8r3j"]
+atlas = ExtResource("1_skby6")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3hkc"]
+atlas = ExtResource("1_skby6")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dffw5"]
+atlas = ExtResource("1_skby6")
+region = Rect2(64, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5fih"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nys3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx21o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8r3j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3hkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dffw5")
+}],
+"loop": true,
+"name": &"bat_fly",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bp3mx"]
+radius = 7.28011
+
+[node name="Bat" type="Node2D"]
+texture_filter = 1
+position = Vector2(22, 25)
+script = ExtResource("1_tq8gb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_b5fih")
+animation = &"bat_fly"
+frame_progress = 0.199539
+script = ExtResource("3_jiwaa")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_bp3mx")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
