@@ -3,16 +3,21 @@ extends StaticBody2D
 #@export var chicken_scene: PackedScene # Escena del pollo que se creará
 @export var chicken_spawn_position: Vector2 # Posición donde aparecerá el nuevo pollo
 var chicken_scene
-@onready var timer: Timer = $Timer
+@onready var timer: Timer = null
 
 func _ready():
 	chicken_scene = preload("res://scenes/chicken.tscn")
-	timer.wait_time = 3.0 # 3 segundos
+	timer = $Timer
+	if timer == null:
+		# Si no se encuentra el Timer, se crea programáticamente
+		timer = Timer.new()
+		add_child(timer)
+	timer.wait_time = 2.0 # 3 segundos
 	timer.one_shot = true # Solo se ejecuta una vez
 	timer.start()
 
 	# Conectar la señal timeout del Timer al método _on_timer_timeout
-	timer.connect("timeout", self, "_on_timer_timeout")
+	timer.connect("timeout", _on_timer_timeout)
 
 func _on_area_2d_area_entered(area):
 	if area.name == "Chicken": # Verifica que sea un pollo el que entró en el área
