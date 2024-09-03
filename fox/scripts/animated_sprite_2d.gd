@@ -1,4 +1,6 @@
 extends AnimatedSprite2D
+
+
 var moving_right = true
 
 
@@ -15,10 +17,13 @@ func _process(delta):
 	else:
 		position.x -= delta * SPEED
 	
-	print(position)
+	#print(position)
 
 	# Cambiar la dirección cuando se alcanza el límite de 40 píxeles
 	if position.x >= 40.0:
 		moving_right = false
-	elif position.x <= 0.0:
+		play("bat_backward")
+	elif position.x <= 1.0:
 		moving_right = true
+		play("bat_fly")
+		

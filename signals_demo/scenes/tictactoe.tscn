@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://dns3ca2uf3hdh"]
+
+[ext_resource type="Script" path="res://scripts/control.gd" id="1_pfpw7"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pfpw7")
+
+[node name="PlayerAnonce" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 77.0
+offset_right = 161.0
+offset_bottom = 124.0
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 193.0
+offset_top = 83.0
+offset_right = 238.0
+offset_bottom = 130.0
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 271.0
+offset_top = 81.0
+offset_right = 316.0
+offset_bottom = 128.0
+
+[node name="Button4" type="Button" parent="."]
+offset_left = 112.0
+offset_top = 150.0
+offset_right = 157.0
+offset_bottom = 197.0
+
+[node name="Button5" type="Button" parent="."]
+offset_left = 190.0
+offset_top = 151.0
+offset_right = 235.0
+offset_bottom = 198.0
+
+[node name="Button6" type="Button" parent="."]
+offset_left = 275.0
+offset_top = 152.0
+offset_right = 320.0
+offset_bottom = 199.0
+
+[node name="Button7" type="Button" parent="."]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 216.0
+offset_right = 158.0
+offset_bottom = 262.0
+
+[node name="Button8" type="Button" parent="."]
+offset_left = 190.0
+offset_top = 217.0
+offset_right = 233.0
+offset_bottom = 263.0
+
+[node name="Button9" type="Button" parent="."]
+offset_left = 276.0
+offset_top = 221.0
+offset_right = 319.0
+offset_bottom = 267.0
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

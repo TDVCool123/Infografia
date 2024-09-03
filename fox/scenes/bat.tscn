@@ -1,8 +1,29 @@
-[gd_scene load_steps=11 format=3 uid="uid://ds50ydx8lhi52"]
+[gd_scene load_steps=18 format=3 uid="uid://ds50ydx8lhi52"]
 
 [ext_resource type="Texture2D" uid="uid://kk71xb6np3po" path="res://assets/textures/Enemies/Bat.png" id="1_skby6"]
 [ext_resource type="Script" path="res://scripts/bat.gd" id="1_tq8gb"]
+[ext_resource type="Texture2D" uid="uid://cgmg7y13t83j5" path="res://assets/textures/Enemies/Bat_backward.png" id="2_2h7ab"]
 [ext_resource type="Script" path="res://scripts/animated_sprite_2d.gd" id="3_jiwaa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gokoa"]
+atlas = ExtResource("2_2h7ab")
+region = Rect2(0, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rusd0"]
+atlas = ExtResource("2_2h7ab")
+region = Rect2(16, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj7n4"]
+atlas = ExtResource("2_2h7ab")
+region = Rect2(32, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_112kg"]
+atlas = ExtResource("2_2h7ab")
+region = Rect2(48, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjhfc"]
+atlas = ExtResource("2_2h7ab")
+region = Rect2(64, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0nys3"]
 atlas = ExtResource("1_skby6")
@@ -28,6 +49,26 @@ region = Rect2(64, 0, 16, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_gokoa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rusd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj7n4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_112kg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjhfc")
+}],
+"loop": true,
+"name": &"bat_backward",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0nys3")
 }, {
 "duration": 1.0,
@@ -50,7 +91,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_bp3mx"]
 radius = 7.28011
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ljnn"]
+radius = 24.0
+
 [node name="Bat" type="Node2D"]
+light_mask = 4
+visibility_layer = 2
 texture_filter = 1
 position = Vector2(22, 25)
 script = ExtResource("1_tq8gb")
@@ -58,14 +104,19 @@ script = ExtResource("1_tq8gb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_b5fih")
-animation = &"bat_fly"
-frame_progress = 0.199539
+animation = &"bat_backward"
 script = ExtResource("3_jiwaa")
 
 [node name="HurtBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_bp3mx")
 
+[node name="player_detect_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detect_area"]
+shape = SubResource("CircleShape2D_8ljnn")
+debug_color = Color(0.552941, 0.4, 1, 0.282353)
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_entered" from="player_detect_area" to="." method="_on_player_detect_area_area_entered"]
